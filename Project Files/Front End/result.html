@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Volume Prediction Result</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .prediction-result {
+            padding: 40px;
+        }
+        
+        .prediction-value {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        .prediction-label {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .input-summary {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .input-summary h3 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .input-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .input-label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .input-value {
+            color: #666;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            color: white;
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .traffic-info {
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+            border-radius: 10px;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .traffic-info h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        
+        .traffic-info p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .prediction-value {
+                font-size: 2.5rem;
+                padding: 20px;
+            }
+            
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Prediction Complete!</h1>
+            <p>Traffic volume prediction based on your inputs</p>
+        </div>
+        
+        <div class="prediction-result">
+            <div class="prediction-label">Estimated Traffic Volume</div>
+            <div class="prediction-value">{{ prediction }}</div>
+            <div style="color: #666; font-size: 0.9rem;">vehicles per hour</div>
+            
+            <div class="input-summary">
+                <h3>Input Summary</h3>
+                <div class="input-grid">
+                    <div class="input-item">
+                        <span class="input-label">Holiday:</span>
+                        <span class="input-value">{{ input_data.holiday }}</span>
+                    </div>
+                    <div class="input-item">
+                        <span class="input-label">Temperature:</span>
+                        <span class="input-value">{{ input_data.temp }}°C</span>
+                    </div>
+                    <div class="input-item">
+                        <span class="input-label">Rain:</span>
+                        <span class="input-value">{{ input_data.rain }}mm</span>
+                    </div>
+                    <div class="input-item">
+                        <span class="input-label">Snow:</span>
+                        <span class="input-value">{{ input_data.snow }}mm</span>
+                    </div>
+                    <div class="input-item">
+                        <span class="input-label">Weather:</span>
+                        <span class="input-value">{{ input_data.weather }}</span>
+                    </div>
+                    <div class="input-item">
+                        <span class="input-label">Date:</span>
+                        <span class="input-value">{{ input_data.year }}-{{ input_data.month }}-{{ input_data.day }}</span>
+                    </div>
+                    <div class="input-item">
+                        <span class="input-label">Hour:</span>
+                        <span class="input-value">{{ input_data.hour }}:00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="traffic-info">
+                <h4>Traffic Level Interpretation</h4>
+                {% if prediction < 1000 %}
+                    <p><strong>Low Traffic:</strong> Light traffic conditions expected. Good time for travel with minimal delays.</p>
+                {% elif prediction < 3000 %}
+                    <p><strong>Moderate Traffic:</strong> Normal traffic conditions. Some congestion possible during peak hours.</p>
+                {% elif prediction < 5000 %}
+                    <p><strong>Heavy Traffic:</strong> High traffic volume expected. Allow extra time for travel.</p>
+                {% else %}
+                    <p><strong>Very Heavy Traffic:</strong> Extremely high traffic volume predicted. Consider alternative routes or timing.</p>
+                {% endif %}
+            </div>
+            
+            <div class="buttons">
+                <a href="/" class="btn btn-primary">Make Another Prediction</a>
+                <a href="/about" class="btn btn-secondary">About This Model</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

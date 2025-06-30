@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Traffic Volume Predictor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 30px;
+        }
+        
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .error-content {
+            padding: 40px;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #dc3545;
+        }
+        
+        .error-message h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .error-message p {
+            line-height: 1.5;
+        }
+        
+        .suggestions {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #17a2b8;
+            text-align: left;
+        }
+        
+        .suggestions h4 {
+            margin-bottom: 15px;
+            color: #0c5460;
+        }
+        
+        .suggestions ul {
+            padding-left: 20px;
+        }
+        
+        .suggestions li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .error-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="error-icon">⚠️</div>
+            <h1>Oops! Something went wrong</h1>
+            <p>We encountered an error while processing your request</p>
+        </div>
+        
+        <div class="error-content">
+            <div class="error-message">
+                <h3>Error Details:</h3>
+                <p>{{ message }}</p>
+            </div>
+            
+            <div class="suggestions">
+                <h4>Possible Solutions:</h4>
+                <ul>
+                    <li>Check if all required model files are present in the application directory</li>
+                    <li>Ensure all input values are within valid ranges</li>
+                    <li>Verify that the model file (traffic_volume.pkl) is properly trained and saved</li>
+                    <li>Make sure all required Python packages are installed</li>
+                    <li>Try refreshing the page and submitting the form again</li>
+                </ul>
+            </div>
+            
+            <a href="/" class="btn">Try Again</a>
+        </div>
+    </div>
+</body>
+</html>
