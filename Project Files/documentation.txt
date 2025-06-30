@@ -1,0 +1,59 @@
+Traffic Volume Predictor
+A machine learning web application that predicts traffic volume based on weather conditions, time factors, and other environmental variables using Flask and scikit-learn.
+🎯 Project Overview
+This project demonstrates the complete machine learning pipeline from data preprocessing to model deployment. The application uses various algorithms to predict traffic volume and provides a user-friendly web interface for making predictions.
+✨ Features
+
+Machine Learning Models: Random Forest, Linear Regression, Decision Tree, KNN, and SVR
+Weather Integration: Considers temperature, rainfall, snowfall, and weather conditions
+Time-Based Analysis: Incorporates hour, day, month, and year for temporal patterns
+Holiday Detection: Accounts for holiday effects on traffic patterns
+Responsive Web Interface: Clean, modern UI that works on all devices
+Real-Time Predictions: Instant results with detailed analysis
+
+🛠️ Technology Stack
+
+Backend: Python, Flask
+Machine Learning: scikit-learn, pandas, numpy
+Data Visualization: matplotlib, seaborn
+Frontend: HTML5, CSS3, JavaScript
+Model Serialization: Pickle
+
+📁 Project Structure
+traffic-volume-predictor/
+│
+├── app.py                  # Main Flask application
+├── model_training.py       # Model training script
+├── requirements.txt        # Python dependencies
+├── README.md              # Project documentation
+│
+├── templates/             # HTML templates
+│   ├── index.html         # Home page
+│   ├── result.html        # Prediction results
+│   ├── error.html         # Error page
+│   └── about.html         # About page
+│
+├── models/                # Saved model files (created after training)
+│   ├── traffic_volume.pkl # Trained model
+│   └── scaler.pkl         # Feature scaler
+│
+└── data/                  # Dataset directory
+    └── weatherAus.csv     # Dataset (if available)
+🚀 Installation & Setup
+1. Clone the Repository
+bashgit clone https://github.com/yourusername/traffic-volume-predictor.git
+cd traffic-volume-predictor
+2. Create Virtual Environment
+bashpython -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+3. Install Dependencies
+bashpip install -r requirements.txt
+4. Train the Model
+bashpython model_training.py
+This will create sample data if no dataset is provided and train multiple models.
+5. Run the Application
+bashpython app.py
+6. Access the Application
+Open your browser and navigate to http://localhost:5000
+📊 Model Training
+The project includes a comprehensive
